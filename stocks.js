@@ -33,15 +33,28 @@ function posOrNeg(input,value){
     };
 
 
+    // $("#Form").on("submit",function(event){
+    //   event.preventDefault();
+    //   $(input).removeClass();
+    // })
+
+
+var stockTicker;
 
 
 $("#Form").on("submit",function(event){
   event.preventDefault();
-  var stockTicker = $("#ticker").val().toUpperCase();
+   stockTicker = $("#ticker").val().toUpperCase();
           reLoad();
+});
+
+
 
 function reLoad(){
-  $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"+stockTicker+"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
+
+  $.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"+stockTicker+"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
+
+  .then(function(data) {
   var dollarChange = round2Fixed(data.query.results.quote.Change);
   var percentChange = round2Fixed((data.query.results.quote.Change/data.query.results.quote.PreviousClose)*100);
   var dollarFiftyDayChange = round2Fixed(data.query.results.quote.ChangeFromFiftydayMovingAverage);
@@ -66,14 +79,22 @@ function reLoad(){
   $("#volume").empty().append(commaSeparateNumber(data.query.results.quote.Volume));
   $("#AverageDailyVolume").empty().append(commaSeparateNumber(data.query.results.quote.AverageDailyVolume));
 
+  setTimeout(reLoad,5000);
 
       // $(".resultsQuote").empty();
+})
+    };
 
-    });
-setTimeout(reLoad,5000);
-};
 
-});
+
+
+
+
+
+
+
+
+
 
 // $(".submit").on("click",function(){
 //   $(".resultsQuote").empty();
@@ -88,3 +109,5 @@ setTimeout(reLoad,5000);
 // parseRSS("https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q="+$("#ticker").val()+"+site:yahoo.com&tbm=nws", '#yahoo');
 // parseRSS("https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#tbm=nws&q="+$("#ticker").val()+"+site:marketwatch.com", '#marketwatch')
 // });
+
+// 760622527118921730 (twitter key)
