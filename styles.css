@@ -1,0 +1,121 @@
+html{
+  height:100%;
+  width: auto;
+}
+.jumboContainer{
+  display: flex;
+  justify-content: center;
+  width:100%;
+  height: auto;
+}
+.jumbo{
+  height:90px;
+  width: 728px;
+  margin-right: auto;
+  margin-left: auto;
+}
+body{
+  background: black;
+  /*background: url("backgroundPic.jpg");*/
+  /*background-size: cover;*/
+  /*background-repeat: no-repeat;*/
+
+}
+.searchContainer{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  height: 250px;
+  width: 30vh;
+  background-color: black;
+  color: rgb(28, 219, 7);
+}
+.form{
+  align-content: center;
+
+}
+.buttonDiv {
+  position: relative;
+}
+/*.resultContainer{
+  display: inline-block;
+  position: fixed;
+  height: 100px;
+  width: 30%;
+  border-style: solid;
+  border-width: medium;
+  background-color: rgb(204, 205, 204);
+  padding-bottom: 10;
+}*/
+.resultHead{
+  display: inline-block;
+}
+.resultsQuote{
+  position: relative;
+  list-style-type: none;
+}
+.symbol{
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+  padding: 5px;
+}
+.name{
+  font-size: 23px;
+  color: black;
+  padding: 5px;
+}
+.exchange{
+  font-size: 18px;
+  color: rgb(60, 61, 61);
+  padding: 5px;
+}
+.result{
+  display: inline-block;
+  font-size:20px;
+  color: black;
+  padding: 5px;
+}
+.table{
+width: 55%;
+height: auto;
+position: relative;
+margin:3% auto 3% 0;
+line-height: 1.4em;
+background-color: white;
+border: 2px black;
+}
+/* If in mobile screen with maximum width 479px. The iPhone screen resolution is 320x480 px (except iPhone4, 640x960) */
+@media only screen and (max-width: 479px){
+    .table { width: 90%; }
+}
+
+.infoApi{
+  font-weight: bold;
+}
+
+td {
+  padding:10px 10px 10px 10px;
+}
+
+.net_change{
+  font-size:18px;
+  color: black;
+  padding: 5px;
+}
+
+.myDiv{
+  display: inline-block;
+}
+
+.pos{
+    color: green;
+}
+
+.unchanged{
+    color: black;
+}
+
+.neg{
+    color: red;
+}
