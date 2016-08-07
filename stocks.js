@@ -32,23 +32,13 @@ function posOrNeg(input,value){
         }
     };
 
-
-    // $("#Form").on("submit",function(event){
-    //   event.preventDefault();
-    //   $(input).removeClass();
-    // })
-
-
 var stockTicker;
-
 
 $("#Form").on("submit",function(event){
   event.preventDefault();
    stockTicker = $("#ticker").val().toUpperCase();
           reLoad();
 });
-
-
 
 function reLoad(){
 
@@ -64,9 +54,9 @@ function reLoad(){
   $("#name").empty().append(data.query.results.quote.Name);
   $("#symbol").empty().append(data.query.results.quote.symbol);
   $("#exchange").empty().append(data.query.results.quote.StockExchange);
-  $("#result").empty().append("Delayed Quote $"+ round2Fixed(data.query.results.quote.LastTradePriceOnly));
+  $("#result").empty().append("$"+ round2Fixed(data.query.results.quote.LastTradePriceOnly));
   $("#change").empty().append(" $"+ posOrNeg("#change",dollarChange)+" ("+posOrNeg("#change",percentChange)+"%)");
-      $("#result").hide().fadeIn(500);
+      $("#result").hide().fadeIn(100);
   $("#time").empty().append("Last Valid Trade Time (EST): "+ data.query.results.quote.LastTradeTime);
   $("#ask").empty().append("$" +round2Fixed(data.query.results.quote.Ask));
   $("#bid").empty().append("$" + round2Fixed(data.query.results.quote.Bid));
@@ -81,33 +71,58 @@ function reLoad(){
 
   setTimeout(reLoad,5000);
 
-      // $(".resultsQuote").empty();
 })
     };
 
 
 
 
+// ('Access-Control-Allow-Origin: *');
 
 
 
+$("#Form").on("submit",function(event){
+  event.preventDefault();
+   stockTicker = $("#ticker").val().toUpperCase();
+   getFeed();
+});
 
+function getFeed(){
 
+$.get("http://cors-anywhere.herokuapp.com/https://feeds.finance.yahoo.com/rss/2.0/headline?s="+stockTicker+"&region=US&lang=en-US", function(data) {
+    var $XML = $(data);
+    $XML.find("item").each(function() {
+        var $this = $(this);
+        var lnk = $this.find("link").text();
+        var correctLnk = lnk.substring(lnk.lastIndexOf("*") + 1),
 
+        item = {
+                title:       $this.find("title").text(),
+                link:        correctLnk,
+                description: $this.find("description").text(),
+                pubDate:     $this.find("pubDate").text(),
+            };
+        $('#rss_feed').append($('<h1/>').text(item.title));
+        $('#rss_feed').append($('<p/>').text(item.description));
+        $('#rss_feed').append($('<a href=""/>').text(item.link));
 
+          });
+});
+}
 
-// $(".submit").on("click",function(){
-//   $(".resultsQuote").empty();
-// });
+$("#Form").on("submit",function(event){
+  event.preventDefault();
+   stockTicker = $("#ticker").val().toUpperCase();
 
+$.get("http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22AAPL%22%20and%20startDate%20=%20%222012-09-11%22%20and%20endDate%20=%20%222014-02-11%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=")
 
+.then(function(data) {
 
+let date = data.query.results.quote.date;
+let open = data.query.results.quote.open;
+let close = data.query.results.quote.close;
+let low = data.query.results.quote.low;
+let high = data.query.results.quote.high;
+let volume = data.query.results.quote.volume;
 
-// $(function(){
-// parseRSS("https://twitter.com/hashtag/"+$("#ticker").val(), "#twitter");
-// parseRSS("https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q="+$("#ticker").val()+"%20site%3Acnbc.com", '#CNBC');
-// parseRSS("https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q="+$("#ticker").val()+"+site:yahoo.com&tbm=nws", '#yahoo');
-// parseRSS("https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#tbm=nws&q="+$("#ticker").val()+"+site:marketwatch.com", '#marketwatch')
-// });
-
-// 760622527118921730 (twitter key)
+});

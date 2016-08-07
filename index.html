@@ -1,100 +1,120 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 
-     <!-- <link href= "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cyborg/bootstrap.min.css">  <!--change for different bootstrap theme -->
-     <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
 
-     <div class="jumboContainer">
-       <img src="jumbotron.jpg" class="jumbo">
-     </div>
-  </head>
-  <body>
-<br><br>
+    <!-- <link rel="stylesheet" href="Skeleton-2.0.4/css/normalize.css">
+    <link rel="stylesheet" href="Skeleton-2.0.4/css/skeleton.css"> -->
+
+
+    <!-- <link href= "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cyborg/bootstrap.min.css">  <!--change for different bootstrap theme -->
+    <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+
+    <div class="jumboContainer">
+        <img src="jumbotron.jpg" class="jumbo">
+    </div>
+</head>
+
+<body class="container">
+    <br>
 
     <div class="searchContainer">
-        <form name="search" autocomplete="on" id="Form" class="form" method="post"><br>
-          <label for="Ticker">Ticker: </label><br>
-          <input type="text" name= "ticker" placeholder="Enter Ticker Symbol" id="ticker" class="ticker"><br><br>
-          <label for="startDate">Start date: </label><br>
-          <input type="text" name= "startDate" placeholder="ex: 2015-01-20" id="startDate" class="startDate"><br><br>
-          <label for="endDate">End date: </label><br>
-          <input type="text" name= "endDate" placeholder="ex: 2016-01-29" id="endDate" class="endDate"><br><br>
-          <select id= "type" class="type">
-            <option  disabled selected>Select a Type Here</option>
-            <option>minutes</option>
-            <option>daily</option>
-            <option>weekly</option>
-            <option>monthly</option>
-            <option>quarterly</option>
-            <option>yearly</option>
-          </select>
-      </div>
-          <div class="buttonDiv">
-            <input type="submit" name= "submit" placeholder="Save" id="button" value="submit" class="button">
-          </div>
-        </form>
+        <form name="search" autocomplete="on" id="Form" class="form" method="post">
+            <br>
+            <label for="Ticker">Ticker: </label>
+            <input type="text" name="ticker" placeholder="Enter Ticker Symbol" id="ticker" class="ticker">
+            <label for="startDate">Start date: </label>
+            <input type="text" name="startDate" placeholder="ex: 2015-01-20" id="startDate" class="startDate">
+            <label for="endDate">End date: </label>
+            <input type="text" name="endDate" placeholder="ex: 2016-01-29" id="endDate" class="endDate">
+            <select id="type" class="type">
+                <option disabled selected>Select a Type Here</option>
+                <option>minutes</option>
+                <option>daily</option>
+                <option>weekly</option>
+                <option>monthly</option>
+                <option>quarterly</option>
+                <option>yearly</option>
+            </select>
+    </div>
+
+    <div class="buttonDiv">
+        <input type="submit" name="submit" placeholder="Save" id="button" value="submit" class="button">
+    </div>
+    </form>
 
 
 
-<div class="table">
-  <table id="table" border=1 frame=hsides rules=rows cellpadding="10">
-  <span id= "resultsQuote" class= "resultsQuote">
-  <span class = "resultHead">
-    <br>
-  <span class="symbol" id="symbol"></span><span class="name" id="name"></span><span class="exchange" id="exchange"></span><br>
+    <table class="container">
+      <thead class= "head">
+        <tr>
+          <td colspan= "2" class="noBorder"><pre><span class="symbol" id="symbol"></span><span class="name" id="name"></span><span class="exchange" id="exchange"></span></pre></td>
+          <td colspan= "2" class="noBorder"><pre><span class="result" id='result'></span><span class="change" id='change'></span></pre>
+          <pre><span class="noBorder" id='time'></span></pre></td>
 
-  <section>
-    <span  class="result" id='result'></span><span class="change" id='change'></span>
-  </section>
-    <span class="time" id='time'></div>
+        </tr>
+        </thead>
+        <br><br><br><br>
+        <tbody class="tbody">
 
-</span><br><br>
+          <tr>
+            <td class="dayResults">Previous Close</th>
+              <td id= "previousClose" class="infoApi"></td>
+              <td class="dayResults">Year Range</td>
+              <td id= "yearRange" class="infoApi"></td>
+          </tr>
 
-  <tr>
-    <td class="dayResults">Previous Close</th>
-    <td id= "previousClose" class="infoApi"></td>
-    <td class="dayResults">Year Range</td>
-    <td id= "yearRange" class="infoApi"></td>
-  </tr>
+          <tr>
+            <td class="dayResults">Open</td>
+            <td id= "open" class="infoApi"></td>
+            <td class="dayResults">Day's Range</th>
+              <td id= "dayRange" class="infoApi"></td>
+          </tr>
 
-  <tr>
-    <td class="dayResults">Open</td>
-    <td id= "open" class="infoApi"></td>
-    <td class="dayResults">Day's Range</th>
-    <td id= "dayRange" class="infoApi"></td>
-  </tr>
+          <tr>
+            <td class="dayResults">Bid</th>
+            <td id= "bid" class="infoApi"></td>
+            <td class="dayResults">Volume</th>
+            <td id= "volume" class="infoApi"></td>
+          </tr>
 
-  <tr>
-    <td class="dayResults">Bid</th>
-    <td id= "bid" class="infoApi"></td>
-    <td class="dayResults">Volume</th>
-    <td id= "volume" class="infoApi"></td>
-  </tr>
+          <tr>
+            <td class="dayResults">Ask</th>
+            <td id= "ask" class="infoApi"></td>
+            <td class="dayResults">Avg Daily Volume</th>
+            <td id= "AverageDailyVolume" class="infoApi"></td>
+          </tr>
 
-  <tr>
-    <td class="dayResults">Ask</th>
-    <td id= "ask" class="infoApi"></td>
-    <td class="dayResults">Avg Daily Volume</th>
-    <td id= "AverageDailyVolume" class="infoApi"></td>
-  </tr>
+          <tr>
+            <td class="dayResults">50 Day Moving Avg</th>
+            <td id= "50dayMovingAverage" class="infoApi"></td>
+            <td class="dayResults">200 Day Moving Avg</th>
+            <td id= "200dayMovingAverage" class="infoApi"></td>
+          </tr>
+        </tbody>
+  </table>
+<br><br><br>
 
-  <tr>
-    <td class="dayResults">50 Day Moving Avg</th>
-    <td id= "50dayMovingAverage" class="infoApi"></td>
-    <td class="dayResults">200 Day Moving Avg</th>
-    <td id= "200dayMovingAverage" class="infoApi"></td>
-  </tr>
 
-</table>
+<div id="rss_feed" class= "rss_feed">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="stocks.js"></script>
-</body>
+</div>
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="stocks.js"></script>
+
+  </body>
 </html>
 
 
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->

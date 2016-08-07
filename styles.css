@@ -1,18 +1,17 @@
-html{
+/*html{
   height:100%;
   width: auto;
-}
+}*/
 .jumboContainer{
   display: flex;
   justify-content: center;
   width:100%;
-  height: auto;
 }
 .jumbo{
-  height:90px;
-  width: 728px;
-  margin-right: auto;
-  margin-left: auto;
+  height: 1%;
+  width: 100%;
+  margin-top: 2%;
+
 }
 body{
   background: black;
@@ -21,81 +20,124 @@ body{
   /*background-repeat: no-repeat;*/
 
 }
-.searchContainer{
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  height: 250px;
-  width: 30vh;
-  background-color: black;
-  color: rgb(28, 219, 7);
-}
-.form{
-  align-content: center;
 
-}
-.buttonDiv {
-  position: relative;
-}
-/*.resultContainer{
-  display: inline-block;
-  position: fixed;
-  height: 100px;
-  width: 30%;
-  border-style: solid;
-  border-width: medium;
-  background-color: rgb(204, 205, 204);
-  padding-bottom: 10;
-}*/
-.resultHead{
-  display: inline-block;
-}
-.resultsQuote{
-  position: relative;
-  list-style-type: none;
-}
 .symbol{
   font-size: 25px;
   font-weight: bold;
-  color: black;
+  color: white;
   padding: 5px;
 }
 .name{
   font-size: 23px;
-  color: black;
+  color: white;
   padding: 5px;
 }
 .exchange{
   font-size: 18px;
-  color: rgb(60, 61, 61);
+  color: rgb(164, 164, 164);
   padding: 5px;
 }
 .result{
   display: inline-block;
   font-size:20px;
-  color: black;
+  color: white;
   padding: 5px;
 }
+
 .table{
-width: 55%;
-height: auto;
-position: relative;
-margin:3% auto 3% 0;
-line-height: 1.4em;
 background-color: white;
-border: 2px black;
 }
-/* If in mobile screen with maximum width 479px. The iPhone screen resolution is 320x480 px (except iPhone4, 640x960) */
-@media only screen and (max-width: 479px){
-    .table { width: 90%; }
+.noBorder{
+  border: none;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  /*line-height: 1.42em;*/
+  color:white;
+}
+
+h2 {
+  font-size:1em;
+  font-weight: 300;
+  text-align: center;
+  display: block;
+  line-height:1em;
+  padding-bottom: 2em;
+  color: white;
+}
+
+
+.container td {
+	  font-weight: normal;
+	  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
+	        box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container {
+	  text-align: left;
+	  /*overflow: hidden;*/
+	  width: 90%;
+	  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
+}
+
+.container td, .container th {
+	  padding-bottom: 2%;
+	  padding-top: 2%;
+  padding-left:2%;
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+	  background-color: #06173c;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+	  background-color: rgb(4, 20, 52);
+}
+
+.container td:first-child { color: white; }
+
+.container tr:hover {
+   background-color: #01040b;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+	        box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container td:hover {
+  background-color: black;
+  color: #00A8E8;
+  font-weight:  bolder;
+
+  box-shadow: #333138 -1px 1px, #333138 -2px 2px, #333138 -3px 3px, #333138 -4px 4px, #333138 -5px 5px, #333138 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+
+  transition-delay: 0s;
+	  transition-duration: 0.4s;
+	  transition-property: all;
+  transition-timing-function: line;
+}
+
+.container thead tr td{
+	  background-color: #08122a;
+    border: none;
+    padding: 1% 1% 1% 1%
+}
+
+@media (max-width: 800px) {
+.container td:nth-child(4),
+.container th:nth-child(4) { display: none; }
 }
 
 .infoApi{
   font-weight: bold;
-}
-
-td {
-  padding:10px 10px 10px 10px;
 }
 
 .net_change{
@@ -104,18 +146,162 @@ td {
   padding: 5px;
 }
 
-.myDiv{
-  display: inline-block;
-}
 
 .pos{
     color: green;
 }
-
 .unchanged{
     color: black;
 }
-
 .neg{
     color: red;
+}
+
+.button,
+button,
+input[type="submit"]
+{
+  display:flex;
+  align-self: center;
+  height: 38px;
+  padding: 0 30px;
+  color: white;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid white;
+  cursor: pointer;
+  box-sizing: border-box; }
+
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus
+ {
+  color: #333;
+  border-color: #888;
+  outline: 0; }
+
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary
+ {
+  color: #FFF;
+  background-color: #33C3F0;
+  border-color: #33C3F0; }
+
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus
+ {
+  color: #FFF;
+  background-color: #1EAEDB;
+  border-color: #1EAEDB; }
+
+
+/* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="text"]
+textarea,
+select {
+  height: 38px;
+  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+  background-color: #fff;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box; }
+/* Removes awkward default styles on some inputs for iOS */
+input[type="text"]
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
+
+textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px; }
+
+input[type="text"]
+textarea:focus,
+select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0; }
+
+label,
+legend {
+  display: inline-flex;      /***************/
+  margin-bottom: .5rem;
+  font-weight: 600; }
+
+fieldset {
+  padding: 0;
+  border-width: 0; }
+
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline;
+}
+
+label > .label-body {
+  display: inline-block;
+  margin-left: .5rem;
+  font-weight: normal;
+}
+
+
+.searchContainer{
+    display: inline-flex;
+    justify-content: space-around;
+    height: auto;
+    width: 90%;
+    padding: 6px 10px;
+  }
+  .buttonDiv{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+.rss_feed{
+  background: gray;
+  height: auto;
+  width:100%;
+  display: block;
+  color: white;
+}
+#rssTitle{
+  color: black;
+  border-bottom: 0;
+  font-size: 18px;
+}
+h1{
+  font-family: inherit;
+  font-weight: bold;
+  color: white;
+  font-size: 18px;
+}
+p{
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: normal;
+}
+#rssLink{
+  color:blue;
 }
