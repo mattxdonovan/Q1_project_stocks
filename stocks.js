@@ -1,5 +1,12 @@
-//
+
 // http://marketdata.websol.barchart.com/getHistory.json?key=b3ec29de1356877ff2be07f40c254204&symbol=IBM&type=daily&startDate=20150728000000
+// ('Access-Control-Allow-Origin: *');
+
+
+//======================== END of Snapshot View ========================
+
+google.charts.load('current', {'packages':['corechart']});
+
 function commaSeparateNumber(val){
    while (/(\d+)(\d{3})/.test(val.toString())){
      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
@@ -74,16 +81,16 @@ function reLoad(){
 })
     };
 
+//======================== END of Snapshot View ========================
 
 
-
-// ('Access-Control-Allow-Origin: *');
-
+//======================== START of News Feed ========================
 
 
 $("#Form").on("submit",function(event){
   event.preventDefault();
    stockTicker = $("#ticker").val().toUpperCase();
+
    getFeed();
 });
 
@@ -110,19 +117,65 @@ $.get("http://cors-anywhere.herokuapp.com/https://feeds.finance.yahoo.com/rss/2.
 });
 }
 
+//======================== END of News Feed ========================
+
+
+//======================== START of Stock Chart ========================
+
+var chartArray = [];
+
 $("#Form").on("submit",function(event){
   event.preventDefault();
-   stockTicker = $("#ticker").val().toUpperCase();
-
-$.get("http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22AAPL%22%20and%20startDate%20=%20%222012-09-11%22%20and%20endDate%20=%20%222014-02-11%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=")
-
-.then(function(data) {
-
-let date = data.query.results.quote.date;
-let open = data.query.results.quote.open;
-let close = data.query.results.quote.close;
-let low = data.query.results.quote.low;
-let high = data.query.results.quote.high;
-let volume = data.query.results.quote.volume;
-
+   var stockTicker = $("#ticker").val().toUpperCase();
+    getChartData()
 });
+
+function getChartData(){
+var stockStartDate = $("#startDate").val();
+var stockEndDate = $("#endDate").val();
+// console.log(stockEndDate);
+  $.get("http://cors-anywhere.herokuapp.com/http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22"+stockTicker+"%22%20and%20startDate%20=%20%22"+stockStartDate+"%22%20and%20endDate%20=%20%22"+stockEndDate+"%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=")
+
+    .then(function(data) {
+    let quoteChart = data.query.results.quote;
+
+      for (i=0; i<data.query.results.quote.length; i++){
+        let newquoteChart = quoteChart[i].Date;
+        chartArray.push([newquoteChart,parseFloat(quoteChart[i].Low,10),parseFloat(quoteChart[i].Open,10),parseFloat(quoteChart[i].Close,10),parseFloat(quoteChart[i].High,10)]);
+      }
+      drawChart()
+        })
+
+};
+
+// google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+      var data = google.visualization.arrayToDataTable(
+      chartArray
+      , true);
+      var options = {
+        legend:'none',
+        title : 'S&P500 vs StockTwits Emotional Sentiment',
+        xAxis: {title: "Price in USD ($)"},
+        yAxis: {title: "Day"},
+        displayAnnotations: true,
+        seriesType: 'candlesticks',
+        series: {1: {type: 'line'}}
+      };
+      var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+
+  //======================== END of Stock Chart ========================
+
+
+
+
+
+// http://ichart.finance.yahoo.com/table.csv?g=d&f=2014&e=12&c=2014&b=10&a=7&d=7&s=AAPL **produces xml doc of stock info****
+// let dateChart = .Date;
+// let lowChart = .Low;
+// let openChart = .Open;
+// let closeChart = .Close;
+// let highChart = .High;
+// let volumeChart = .Volume;

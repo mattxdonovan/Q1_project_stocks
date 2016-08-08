@@ -278,7 +278,9 @@ label > .label-body {
     justify-content: center;
     align-content: center;
   }
-
+.feedContainer{
+  
+}
 .rss_feed{
   background: gray;
   height: auto;
