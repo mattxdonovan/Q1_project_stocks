@@ -23,27 +23,20 @@
       <div class="inputDiv">
         <div class="tickerDiv">
         <!-- <label for="Ticker">Ticker: </label> -->
-        <input type="text" name="ticker" placeholder="Enter Ticker Symbol" id="ticker" class="ticker">
+          <input type="text" name="ticker" placeholder="Enter Ticker Symbol" id="ticker" class="ticker">
+        </div>
+        <div class="typeDiv">
+          <select id="type" class="type">
+            <option disabled selected style="color:gray">Select a Type Here</option>
+            <option class= "otherOptions">1 Week</option>
+            <option class= "otherOptions">1 Month</option>
+            <option class= "otherOptions">3 Months</option>
+            <option class= "otherOptions">6 Months</option>
+            <option class= "otherOptions">1 Year</option>
+            <option class= "otherOptions">17 Months</option>
+          </select>
+        </div>
       </div>
-      <div class="startDateDiv">
-        <!-- <label for="startDate">Start date: </label> -->
-        <input type="text" name="startDate" placeholder="Chart Start Date: 2015-01-20" id="startDate" class="startDate">
-      </div>
-      <div class="endDateDiv">
-        <!-- <label for="endDate">End date: </label> -->
-        <input type="text" name="endDate" placeholder="Chart End Date: 2016-01-29" id="endDate" class="endDate">
-      </div>
-      </div>
-
-        <!-- <select id="type" class="type">
-          <option disabled selected>Select a Type Here</option>
-          <option>minutes</option>
-          <option>daily</option>
-          <option>weekly</option>
-          <option>monthly</option>
-          <option>quarterly</option>
-          <option>yearly</option>
-        </select> -->
       <div class="buttonDiv">
         <input type="submit" name="submit" placeholder="Save" id="button" value="submit" class="button">
       </div>
