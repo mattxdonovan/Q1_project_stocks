@@ -11,17 +11,26 @@
     </div>
   </head>
 
-  <body class="container">
+  <body class="bodyContainer">
     <div class="searchContainer">
       <form name="search" autocomplete="on" id="Form" class="form" method="post">
       <br>
+      <div class="inputDiv">
+        <div class="tickerDiv">
         <label for="Ticker">Ticker: </label>
         <input type="text" name="ticker" placeholder="Enter Ticker Symbol" id="ticker" class="ticker">
+      </div>
+      <div class="startDateDiv">
         <label for="startDate">Start date: </label>
         <input type="text" name="startDate" placeholder="ex: 2015-01-20" id="startDate" class="startDate">
+      </div>
+      <div class="endDateDiv">
         <label for="endDate">End date: </label>
         <input type="text" name="endDate" placeholder="ex: 2016-01-29" id="endDate" class="endDate">
-        <select id="type" class="type">
+      </div>
+      </div>
+
+        <!-- <select id="type" class="type">
           <option disabled selected>Select a Type Here</option>
           <option>minutes</option>
           <option>daily</option>
@@ -29,7 +38,7 @@
           <option>monthly</option>
           <option>quarterly</option>
           <option>yearly</option>
-        </select>
+        </select> -->
       <div class="buttonDiv">
         <input type="submit" name="submit" placeholder="Save" id="button" value="submit" class="button">
       </div>
@@ -89,17 +98,23 @@
 
     <!-- ================== CHART START ================== -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+<div class="chartContainer">
+    <div id="chart_div" class= "chart_div"></div>
+  </div>
+
     <!-- ================== CHART END ================== -->
 
 
 
 
     <!-- ================== NEWS FEED START ================== -->
-    <div class="feedContainer">
+    <div class="newsfeedHeadContainer" id="newsfeedHeadContainer">
+      <div id= "newsfeedHead" class="newsfeedHead">
+      </div>
+    </div>
+    <br><br>
+    <div class="feedContainer" id="feedContainer">
       <div id="rss_feed" class= "rss_feed">
-        <!-- <h1></h1>
-        <p></p> -->
       </div>
     </div>
     <!-- ================== NEWS FEED END ================== -->

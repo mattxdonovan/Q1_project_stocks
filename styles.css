@@ -1,24 +1,21 @@
-/*html{
-  height:100%;
+html{
+  height:90%;
   width: auto;
-}*/
+}
 .jumboContainer{
   display: flex;
   justify-content: center;
   width:100%;
 }
 .jumbo{
-  height: 1%;
+  height: 150px;
+  /*height: .75%;*/
   width: 100%;
   margin-top: 2%;
 
 }
 body{
   background: black;
-  /*background: url("backgroundPic.jpg");*/
-  /*background-size: cover;*/
-  /*background-repeat: no-repeat;*/
-
 }
 
 .symbol{
@@ -79,8 +76,8 @@ h2 {
 
 .container {
 	  text-align: left;
-	  /*overflow: hidden;*/
-	  width: 90%;
+	  overflow: hidden;
+	  width: 80%;
 	  margin: 0 auto;
   display: table;
   padding: 0 0 8em 0;
@@ -124,29 +121,23 @@ h2 {
 	  transition-property: all;
   transition-timing-function: line;
 }
-
 .container thead tr td{
 	  background-color: #08122a;
     border: none;
     padding: 1% 1% 1% 1%
 }
-
 @media (max-width: 800px) {
 .container td:nth-child(4),
 .container th:nth-child(4) { display: none; }
 }
-
 .infoApi{
   font-weight: bold;
 }
-
 .net_change{
   font-size:18px;
   color: black;
   padding: 5px;
 }
-
-
 .pos{
     color: green;
 }
@@ -156,7 +147,6 @@ h2 {
 .neg{
     color: red;
 }
-
 .button,
 button,
 input[type="submit"]
@@ -178,8 +168,8 @@ input[type="submit"]
   border-radius: 4px;
   border: 1px solid white;
   cursor: pointer;
-  box-sizing: border-box; }
-
+  box-sizing: border-box;
+}
 .button:hover,
 button:hover,
 input[type="submit"]:hover,
@@ -187,31 +177,29 @@ input[type="reset"]:hover,
 input[type="button"]:hover,
 .button:focus,
 button:focus,
-input[type="submit"]:focus
- {
+input[type="submit"]:focus {
   color: #333;
   border-color: #888;
-  outline: 0; }
-
+  outline: 0;
+}
 .button.button-primary,
 button.button-primary,
-input[type="submit"].button-primary
- {
+input[type="submit"].button-primary {
   color: #FFF;
   background-color: #33C3F0;
-  border-color: #33C3F0; }
+  border-color: #33C3F0;
+}
 
 .button.button-primary:hover,
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
 .button.button-primary:focus,
 button.button-primary:focus,
-input[type="submit"].button-primary:focus
- {
+input[type="submit"].button-primary:focus {
   color: #FFF;
   background-color: #1EAEDB;
-  border-color: #1EAEDB; }
-
+  border-color: #1EAEDB;
+}
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -219,19 +207,12 @@ input[type="text"]
 textarea,
 select {
   height: 38px;
-  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+  padding: 6px 10px;
   background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box; }
-/* Removes awkward default styles on some inputs for iOS */
-input[type="text"]
-textarea {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none; }
-
 textarea {
   min-height: 65px;
   padding-top: 6px;
@@ -240,70 +221,124 @@ textarea {
 input[type="text"]
 textarea:focus,
 select:focus {
-  border: 1px solid #33C3F0;
+  border: 2px solid #33C3F0;
   outline: 0; }
-
 label,
 legend {
-  display: inline-flex;      /***************/
   margin-bottom: .5rem;
   font-weight: 600; }
-
-fieldset {
-  padding: 0;
-  border-width: 0; }
-
 input[type="checkbox"],
 input[type="radio"] {
-  display: inline;
+  display: inline-flex;
+  justify-content: space-around;
 }
-
 label > .label-body {
   display: inline-block;
   margin-left: .5rem;
   font-weight: normal;
 }
-
-
+.inputDiv{
+display: flex;
+justify-content: space-around;
+}
 .searchContainer{
-    display: inline-flex;
-    justify-content: space-around;
     height: auto;
-    width: 90%;
-    padding: 6px 10px;
+    width: 50%;
+    padding-left: 24%;
   }
-  .buttonDiv{
-    width: 90%;
+.buttonDiv{
+  padding-top: 30px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-content: center;
   }
-.feedContainer{
-  
-}
-.rss_feed{
-  background: gray;
-  height: auto;
-  width:100%;
-  display: block;
-  color: white;
-}
+h1{
+    font-family: inherit;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+  }
+p{
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: normal;
+  }
 #rssTitle{
   color: black;
-  border-bottom: 0;
   font-size: 18px;
 }
-h1{
-  font-family: inherit;
-  font-weight: bold;
+.feedContainer{
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+  background: url("borderColors.png");
+  background-size: cover;
+  height: auto;
+  width:100%;
   color: white;
-  font-size: 18px;
+  vertical-align: text-top;
 }
-p{
-  font-size: 14px;
-  font-family: inherit;
-  font-weight: normal;
+.titleLink{
+  display: block;
+  text-align: left;
+  margin-top: 10px;
 }
-#rssLink{
-  color:blue;
+.rss_feed{
+  margin: 0% 8% 3% 5%;
+  /*margin-top: 5%;
+  margin-bottom: 5%;*/
+  color: white;
+  background: black;
+  width: 90%;
+}
+.newsfeedHeadContainer{
+  width:100%;
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+}
+.newsfeedHead{
+display: inline-block;
+border-top: 1px;
+text-align: center;
+font-size: 28px;
+height: 30px;
+}
+.feedDiv{
+  border-style: groove;
+  border-image: url("borderColors.png") 10 stretch repeat;
+  margin: 0px 5px 5px 5px;
+  border-width: 6px;
+  border-bottom:0;
+  border-left: 0;
+  border-right:0;
+  color: white;
+  text-decoration: none;
+  cursor: auto;
+  font-size: 20px;
+  text-align: left;
+}
+.feedDiv > p{
+  text-align: center;
+}
+.feedDiv > .pubDates{
+  /*display: block;*/
+  text-align: right;
+}
+a:-webkit-any-link {
+    color: white;
+    text-decoration: none;
+    cursor: auto;
+    font-size: 20px;
+}
+.chartContainer{
+  width: 100%;
+  height: 900px;
+  display: flex;
+justify-content: center;
+}
+.chart_div{
+width: 80%;
+height: 70%;
 }

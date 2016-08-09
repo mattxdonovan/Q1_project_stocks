@@ -40,6 +40,7 @@ function posOrNeg(input,value){
     };
 
 var stockTicker;
+var stockName;
 
 $("#Form").on("submit",function(event){
   event.preventDefault();
@@ -52,12 +53,14 @@ function reLoad(){
   $.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"+stockTicker+"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
 
   .then(function(data) {
+  stockName = data.query.results.quote.Name;
   var dollarChange = round2Fixed(data.query.results.quote.Change);
   var percentChange = round2Fixed((data.query.results.quote.Change/data.query.results.quote.PreviousClose)*100);
   var dollarFiftyDayChange = round2Fixed(data.query.results.quote.ChangeFromFiftydayMovingAverage);
   var percentFiftyDayChange = round2Fixed((data.query.results.quote.ChangeFromFiftydayMovingAverage/data.query.results.quote.FiftydayMovingAverage)*100);
   var dollar200DayChange = round2Fixed(data.query.results.quote.ChangeFromTwoHundreddayMovingAverage);
   var percent200DayChange = round2Fixed((data.query.results.quote.ChangeFromTwoHundreddayMovingAverage/data.query.results.quote.TwoHundreddayMovingAverage)*100);
+  $("#newsfeedHead").empty().append("Latest Financial News for " + data.query.results.quote.Name+ "<br>");
   $("#name").empty().append(data.query.results.quote.Name);
   $("#symbol").empty().append(data.query.results.quote.symbol);
   $("#exchange").empty().append(data.query.results.quote.StockExchange);
@@ -77,10 +80,9 @@ function reLoad(){
   $("#AverageDailyVolume").empty().append(commaSeparateNumber(data.query.results.quote.AverageDailyVolume));
 
   setTimeout(reLoad,5000);
-
+  return stockName;
 })
     };
-
 //======================== END of Snapshot View ========================
 
 
@@ -90,7 +92,7 @@ function reLoad(){
 $("#Form").on("submit",function(event){
   event.preventDefault();
    stockTicker = $("#ticker").val().toUpperCase();
-
+   $('#rss_feed').empty()
    getFeed();
 });
 
@@ -98,23 +100,32 @@ function getFeed(){
 
 $.get("http://cors-anywhere.herokuapp.com/https://feeds.finance.yahoo.com/rss/2.0/headline?s="+stockTicker+"&region=US&lang=en-US", function(data) {
     var $XML = $(data);
+
     $XML.find("item").each(function() {
         var $this = $(this);
         var lnk = $this.find("link").text();
-        var correctLnk = lnk.substring(lnk.lastIndexOf("*") + 1),
+        var correctLnk = lnk.substring(lnk.lastIndexOf("*") + 1);
+        var desc = $this.find("description").text();
+        var pubDates = $this.find("pubDate").text();
+        var articleTitle = $this.find("title").text();
+
+        if (articleTitle[0] == '"'){
+          articleTitle = JSON.parse(articleTitle);
+        }
+        if (desc == "" ){
+          desc = "There is no description available for this article."
+        }
 
         item = {
-                title:       $this.find("title").text(),
+                title:       articleTitle,
                 link:        correctLnk,
-                description: $this.find("description").text(),
-                pubDate:     $this.find("pubDate").text(),
+                description: desc,
+                pubDate:     pubDates,
             };
-        $('#rss_feed').append($('<h1/>').text(item.title));
-        $('#rss_feed').append($('<p/>').text(item.description));
-        $('#rss_feed').append($('<a href=""/>').text(item.link));
 
-          });
-});
+        $('#rss_feed').append($('<div class="feedDiv"><a class="titleLink" href='+correctLnk+'>'+articleTitle+'</a><p class="descriptions">'+desc+'</p><p class="pubDates">'+pubDates+'</p></div>'));
+    });
+  });
 }
 
 //======================== END of News Feed ========================
@@ -137,8 +148,7 @@ var stockEndDate = $("#endDate").val();
   $.get("http://cors-anywhere.herokuapp.com/http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22"+stockTicker+"%22%20and%20startDate%20=%20%22"+stockStartDate+"%22%20and%20endDate%20=%20%22"+stockEndDate+"%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=")
 
     .then(function(data) {
-    let quoteChart = data.query.results.quote;
-
+      let quoteChart = data.query.results.quote;
       for (i=0; i<data.query.results.quote.length; i++){
         let newquoteChart = quoteChart[i].Date;
         chartArray.push([newquoteChart,parseFloat(quoteChart[i].Low,10),parseFloat(quoteChart[i].Open,10),parseFloat(quoteChart[i].Close,10),parseFloat(quoteChart[i].High,10)]);
@@ -155,9 +165,11 @@ var stockEndDate = $("#endDate").val();
       , true);
       var options = {
         legend:'none',
-        title : 'S&P500 vs StockTwits Emotional Sentiment',
-        xAxis: {title: "Price in USD ($)"},
-        yAxis: {title: "Day"},
+        title : 'Chart for ' + stockTicker,
+        vAxis: {title: "Price in USD ($)"},
+        hAxis: {
+          title: "Day",
+          format: 'M/d/yy'},
         displayAnnotations: true,
         seriesType: 'candlesticks',
         series: {1: {type: 'line'}}
