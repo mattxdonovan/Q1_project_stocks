@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stock Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <div class="jumboContainer">
+      <img src="MXDlogo.png" class="jumboSide">
+      <img src="jumboText.png" class="jumboCenter">
+      <img src="chartLogo.png" class="jumboSide">
+    </div>
+  </head>
+    <!-- <div class="jumbo2">
+      <h2 class="headerName2">For all of your investing needs</h1>
+    </div> -->
+
+  <body class="bodyContainer">
+    <div class="searchContainer">
+      <form name="search" autocomplete="on" id="Form" class="form" method="post">
+      <br>
+      <div class="inputDiv">
+        <div class="tickerDiv">
+        <!-- <label for="Ticker">Ticker: </label> -->
+          <input type="text" name="ticker" placeholder="Enter Ticker Symbol" id="ticker" class="ticker">
+        </div>
+        <div class="typeDiv">
+          <select id="type" class="type">
+            <option disabled selected style="color:gray">Select a Time Range Here</option>
+            <option class= "otherOptions">1 Week</option>
+            <option class= "otherOptions">1 Month</option>
+            <option class= "otherOptions">3 Months</option>
+            <option class= "otherOptions">6 Months</option>
+            <option class= "otherOptions">1 Year</option>
+            <option class= "otherOptions">17 Months</option>
+          </select>
+        </div>
+        <div class="typeChartDiv">
+          <select id="typeChart" class="typeChart">
+            <option disabled selected style="color:gray">Select a Chart Type Here</option>
+            <option class= "otherOptions">Candlestick</option>
+            <option class= "otherOptions">Line</option>
+            <option class= "otherOptions"></option>
+            <option class= "otherOptions"></option>
+            <option class= "otherOptions"></option>
+          </select>
+        </div>
+      </div>
+      <div class="buttonDiv">
+        <input type="submit" name="submit" placeholder="Save" id="button" value="submit" class="button">
+      </div>
+    </div>
+      </form>
+
+    <!-- ================== SNAPSHOT TABLE START ================== -->
+    <table class="container">
+      <thead class= "head">
+        <tr>
+          <td colspan= "2" class="noBorder"><pre><span class="symbol" id="symbol"></span><span class="name" id="name"></span><span class="exchange" id="exchange"></span></pre></td>
+          <td colspan= "2" class="noBorder"><pre><span class="result" id='result'></span><span class="change" id='change'></span></pre>
+            <pre><span class="noBorder" id='time'></span></pre>
+          </td>
+        </tr>
+      </thead>
+      <br><br><br><br>
+
+      <tbody class="tbody">
+        <tr>
+          <td class="dayResults">Previous Close</th>
+          <td id= "previousClose" class="infoApi"></td>
+          <td class="dayResults">Year Range</td>
+          <td id= "yearRange" class="infoApi"></td>
+        </tr>
+        <tr>
+          <td class="dayResults">Open</td>
+          <td id= "open" class="infoApi"></td>
+          <td class="dayResults">Day's Range</th>
+          <td id= "dayRange" class="infoApi"></td>
+        </tr>
+        <tr>
+          <td class="dayResults">Bid</th>
+          <td id= "bid" class="infoApi"></td>
+          <td class="dayResults">Volume</th>
+          <td id= "volume" class="infoApi"></td>
+        </tr>
+        <tr>
+          <td class="dayResults">Ask</th>
+          <td id= "ask" class="infoApi"></td>
+          <td class="dayResults">Avg Daily Volume</th>
+          <td id= "AverageDailyVolume" class="infoApi"></td>
+        </tr>
+        <tr>
+          <td class="dayResults">50 Day Moving Avg</th>
+          <td id= "50dayMovingAverage" class="infoApi"></td>
+          <td class="dayResults">200 Day Moving Avg</th>
+          <td id= "200dayMovingAverage" class="infoApi"></td>
+        </tr>
+      </tbody>
+    </table>
+    <br><br><br>
+    <!-- ================== SNAPSHOT TABLE END ================== -->
+
+
+
+
+    <!-- ================== CHART START ================== -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<div class="chartContainer">
+    <div id="chart_div" class= "chart_div"></div>
+  </div>
+
+    <!-- ================== CHART END ================== -->
+
+
+
+
+    <!-- ================== NEWS FEED START ================== -->
+    <div class="newsfeedHeadContainer" id="newsfeedHeadContainer">
+      <div id= "newsfeedHead" class="newsfeedHead">
+      </div>
+    </div>
+    <br><br>
+    <div class="feedContainer" id="feedContainer">
+      <div id="rss_feed" class= "rss_feed">
+      </div>
+    </div>
+    <!-- ================== NEWS FEED END ================== -->
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="stocks.js"></script>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+  </body>
+</html>

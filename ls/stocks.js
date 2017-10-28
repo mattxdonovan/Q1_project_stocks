@@ -52,34 +52,36 @@ $("#Form").on("submit",function(event){
 
 function reLoad(){
 
-  $.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"+stockTicker+"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
-
+$.get("https://api.coinmarketcap.com/v1/ticker/bitcoin/")
+  // $.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"+stockTicker+"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
+  //
   .then(function(data) {
-  stockName = data.query.results.quote.Name;
-  var dollarChange = round2Fixed(data.query.results.quote.Change);
-  var percentChange = round2Fixed((data.query.results.quote.Change/data.query.results.quote.PreviousClose)*100);
-  var dollarFiftyDayChange = round2Fixed(data.query.results.quote.ChangeFromFiftydayMovingAverage);
-  var percentFiftyDayChange = round2Fixed((data.query.results.quote.ChangeFromFiftydayMovingAverage/data.query.results.quote.FiftydayMovingAverage)*100);
-  var dollar200DayChange = round2Fixed(data.query.results.quote.ChangeFromTwoHundreddayMovingAverage);
-  var percent200DayChange = round2Fixed((data.query.results.quote.ChangeFromTwoHundreddayMovingAverage/data.query.results.quote.TwoHundreddayMovingAverage)*100);
-  $("#newsfeedHead").empty().append("Latest Financial News for " + data.query.results.quote.Name+ "<br>");
-  $("#name").empty().append(data.query.results.quote.Name);
-  $("#symbol").empty().append(data.query.results.quote.symbol);
-  $("#exchange").empty().append(data.query.results.quote.StockExchange);
-  $("#result").empty().append("$"+ round2Fixed(data.query.results.quote.LastTradePriceOnly));
-  $("#change").empty().append(" $"+ posOrNeg("#change",dollarChange)+" ("+posOrNeg("#change",percentChange)+"%)");
-  $("#result").hide().fadeIn(100);
-  $("#time").empty().append("Last Valid Trade Time (EST): "+ data.query.results.quote.LastTradeTime);
-  $("#ask").empty().append("$" +round2Fixed(data.query.results.quote.Ask));
-  $("#bid").empty().append("$" + round2Fixed(data.query.results.quote.Bid));
-  $("#dayRange").empty().append("$" +round2Fixed(data.query.results.quote.DaysLow)+" - $" +round2Fixed(data.query.results.quote.DaysHigh));
-  $("#previousClose").empty().append("$" +round2Fixed(data.query.results.quote.PreviousClose));
-  $("#open").empty().append("$" +round2Fixed(data.query.results.quote.Open));
-  $("#yearRange").empty().append("$" + round2Fixed(data.query.results.quote.YearLow) + " - $"+round2Fixed(data.query.results.quote.YearHigh));
-  $("#50dayMovingAverage").empty().append("$" + round2Fixed(data.query.results.quote.FiftydayMovingAverage) + " ($"+ dollarFiftyDayChange + " / "+ percentFiftyDayChange+ "%)");
-  $("#200dayMovingAverage").empty().append("$" + round2Fixed(data.query.results.quote.TwoHundreddayMovingAverage) + " ($" + dollar200DayChange + " / "+ percent200DayChange+"%)");
-  $("#volume").empty().append(commaSeparateNumber(data.query.results.quote.Volume));
-  $("#AverageDailyVolume").empty().append(commaSeparateNumber(data.query.results.quote.AverageDailyVolume));
+    stockName = data.name;
+  // stockName = data.query.results.quote.Name;
+  // var dollarChange = round2Fixed(data.query.results.quote.Change);
+  // var percentChange = round2Fixed((data.query.results.quote.Change/data.query.results.quote.PreviousClose)*100);
+  // var dollarFiftyDayChange = round2Fixed(data.query.results.quote.ChangeFromFiftydayMovingAverage);
+  // var percentFiftyDayChange = round2Fixed((data.query.results.quote.ChangeFromFiftydayMovingAverage/data.query.results.quote.FiftydayMovingAverage)*100);
+  // var dollar200DayChange = round2Fixed(data.query.results.quote.ChangeFromTwoHundreddayMovingAverage);
+  // var percent200DayChange = round2Fixed((data.query.results.quote.ChangeFromTwoHundreddayMovingAverage/data.query.results.quote.TwoHundreddayMovingAverage)*100);
+  // $("#newsfeedHead").empty().append("Latest Financial News for " + data.query.results.quote.Name+ "<br>");
+  // $("#name").empty().append(data.query.results.quote.Name);
+  // $("#symbol").empty().append(data.query.results.quote.symbol);
+  // $("#exchange").empty().append(data.query.results.quote.StockExchange);
+  // $("#result").empty().append("$"+ round2Fixed(data.query.results.quote.LastTradePriceOnly));
+  // $("#change").empty().append(" $"+ posOrNeg("#change",dollarChange)+" ("+posOrNeg("#change",percentChange)+"%)");
+  // $("#result").hide().fadeIn(100);
+  // $("#time").empty().append("Last Valid Trade Time (EST): "+ data.query.results.quote.LastTradeTime);
+  // $("#ask").empty().append("$" +round2Fixed(data.query.results.quote.Ask));
+  // $("#bid").empty().append("$" + round2Fixed(data.query.results.quote.Bid));
+  // $("#dayRange").empty().append("$" +round2Fixed(data.query.results.quote.DaysLow)+" - $" +round2Fixed(data.query.results.quote.DaysHigh));
+  // $("#previousClose").empty().append("$" +round2Fixed(data.query.results.quote.PreviousClose));
+  // $("#open").empty().append("$" +round2Fixed(data.query.results.quote.Open));
+  // $("#yearRange").empty().append("$" + round2Fixed(data.query.results.quote.YearLow) + " - $"+round2Fixed(data.query.results.quote.YearHigh));
+  // $("#50dayMovingAverage").empty().append("$" + round2Fixed(data.query.results.quote.FiftydayMovingAverage) + " ($"+ dollarFiftyDayChange + " / "+ percentFiftyDayChange+ "%)");
+  // $("#200dayMovingAverage").empty().append("$" + round2Fixed(data.query.results.quote.TwoHundreddayMovingAverage) + " ($" + dollar200DayChange + " / "+ percent200DayChange+"%)");
+  // $("#volume").empty().append(commaSeparateNumber(data.query.results.quote.Volume));
+  // $("#AverageDailyVolume").empty().append(commaSeparateNumber(data.query.results.quote.AverageDailyVolume));
 
   setTimeout(reLoad,10000);
   return stockName;
@@ -225,7 +227,7 @@ function getChartData(){
     break;
 
     case "1 Year":
-    chartTitle = "One Year";
+    chartTitle = "One Year ";
     chartFormat = "MMM";
     var OneYearAgo = new Date();
     let ddLess1yr = OneYearAgo.getDate();
@@ -242,7 +244,7 @@ function getChartData(){
     break;
 
     case "17 Months":
-    chartTitle = "17 Months";
+    chartTitle = "17 Months ";
     chartFormat = "yyyy";
     var seventeenMonthsAgo = new Date();
     let ddLess17m = seventeenMonthsAgo.getDate();
@@ -257,6 +259,7 @@ function getChartData(){
       TwoYearsAgo = yyyyLess17m+"-"+mmLess17m+"-"+ddLess17m;
       stockStartDate = seventeenMonthsAgo;
 }
+
   var apiCall  = "http://cors-anywhere.herokuapp.com/http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22"+stockTicker+"%22%20and%20startDate%20=%20%22"+stockStartDate+"%22%20and%20endDate%20=%20%22"+stockEndDate+"%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback="
   $.get(apiCall)
 
